@@ -1,3 +1,5 @@
+# Taken from cs225 lab_ml and updated for our purposes
+
 # Executable names:
 EXE = eedowdy2-haniakd2-fkabba2-jamesom2
 TEST = test

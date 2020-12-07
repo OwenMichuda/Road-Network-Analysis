@@ -11,7 +11,7 @@ int main() {
 
 	ifstream connections;
 	ifstream vertices;
-
+	// iterate through csv file, creating edge object for each connection
 	connections.open(connections_file);
 	while (!connections.eof()) {
 
