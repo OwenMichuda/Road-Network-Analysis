@@ -7,10 +7,9 @@
 
 #include <string>
 #include <limits.h>
+#include "vertex.h"
 
 using std::string;
-
-typedef string Vertex;
 
 /**
  * Represents an edge in a graph; used by the Graph class.
@@ -60,7 +59,7 @@ class Edge
     /**
      * Default constructor.
      */
-    Edge() : source(""), dest(""), label(""), weight(-1)
+    Edge() : source(), dest(), label(""), weight(-1)
     { /* nothing */
     }
 
@@ -74,6 +73,15 @@ class Edge
     {
         return weight < other.weight;
     }
+
+	Edge& operator=(const Edge& other)
+	{
+		this->source = other.source;
+		this->dest = other.dest;
+		this->label = other.label;
+		this->weight = other.weight;
+		return *this;
+	}
 
     /**
      * Gets edge label.
