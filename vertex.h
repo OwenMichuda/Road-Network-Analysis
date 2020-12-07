@@ -8,10 +8,23 @@
 class Vertex {
     public:
         Vertex() {}
+        Vertex(int idx) : index(idx), x_(-1), y_(-1) {}
         Vertex(int idx, double x, double y) : index(idx), x_(x), y_(y) {}
-        Vertex(Vertex& other) : index(other.index), x_(other.x_), y_(other.y_) {}
+        Vertex(const Vertex& other) : index(other.index), x_(other.x_), y_(other.y_) {}
+
+        int getIndex() const { return index; }
+        int getX() const { return x_; }
+        int getY() const { return y_; }
         
-        bool operator!=(Vertex& other) const {
+
+        Vertex& operator=(Vertex& other) {
+            this->index = other.index;
+            this->x_ = other.x_;
+            this->y_ = other.y_;
+            return *this;
+        }
+
+        bool operator!=(const Vertex& other) const {
             return index != other.index || x_ != other.x_ || y_ != other.y_;
         }
     private:
@@ -19,3 +32,8 @@ class Vertex {
         double x_;
         double y_;
 };
+
+std::ostream& operator<<(std::ostream& os, const Vertex& obj) {
+    os << obj.getIndex();
+    return os;
+}
