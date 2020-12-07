@@ -6,10 +6,11 @@ using namespace std;
 
 int main() {
 	// read data csv files
-	string connections_file = "oldenburg_road_network.csv";
-	string vertices_file = "banlk";
+	string connections_file = "connections_test_data.csv";
+	string vertices_file = "vertices_test_data.csv";
 
 	ifstream connections;
+	ifstream vertices;
 
 	connections.open(connections_file);
 	while (!connections.eof()) {
