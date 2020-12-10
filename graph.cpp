@@ -5,6 +5,73 @@ const int Graph::InvalidWeight = INT_MIN;
 const string Graph:: InvalidLabel = "_CS225INVALIDLABEL";
 const Edge Graph::InvalidEdge = Edge(Graph::InvalidVertex, Graph::InvalidVertex, Graph::InvalidWeight, Graph::InvalidLabel);
 
+Graph::Graph(string connections_file, string vertices_file) {
+    ifstream connections;
+    ifstream vertices_stream;
+    connections.open(connections_file);
+    vertices_stream.open(vertices_file);
+
+    string line;
+    vector<Vertex> vertex_v;
+    while (getline(vertices_stream, line)) {
+        string delim = ",";
+        string index = line.substr(0, line.find(delim));
+        std::stringstream idx(index);
+        int i;
+        idx >> i;
+
+        string x_coor = line.substr(1, line.find(delim));
+        std::stringstream x_str(x_coor);
+        double x;
+        x_str >> x;
+
+        string y_coor = line.substr(2, line.find(delim));
+        std::stringstream y_str(y_coor);
+        double y;
+        y_str >> y;
+
+        insertVertex(Vertex(i, x, y));
+        vertex_v.push_back(Vertex(i, x, y));
+    }
+
+    string n;
+    while (getline(connections, n)) {
+        string delim = ",";
+        string index = n.substr(0, n.find(delim));
+        std::stringstream idx(index);
+        int i;
+        idx >> i;
+
+        string vertex1 = n.substr(1, n.find(delim));
+        std::stringstream ver1(vertex1);
+        int v1;
+        ver1 >> v1;
+        
+        string vertex2 = n.substr(2, n.find(delim));
+        std::stringstream ver2(vertex2);
+        int v2;
+        ver2 >> v2;
+
+        string weight = n.substr(3, n.find(delim));
+        std::stringstream we(weight);
+        int w;
+        we >> w;
+
+        Vertex start;
+        Vertex end;
+        for(Vertex vx : vertex_v) {
+            if (vx.getIndex() == v1) {
+                start = vx;
+            }
+            if (vx.getIndex() == v2) {
+                end = vx;
+            }
+        }
+
+        insertEdge(start, end);
+    }
+}
+
 Graph::Graph(bool weighted) : weighted(weighted),directed(false),random(Random(0))
 {
 }

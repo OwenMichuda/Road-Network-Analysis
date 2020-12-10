@@ -49,6 +49,8 @@ using std::pair;
 using std::make_pair;
 using std::unordered_map;
 
+using std::ifstream;
+
 
 /**
  * Represents a graph; used by the GraphTools class.
@@ -57,6 +59,8 @@ using std::unordered_map;
 class Graph
 {
 public:
+
+    Graph(string connections_file, string vertices_file);
     /**
      * Constructor to create an empty graph.
      * @param weighted - specifies whether the graph is a weighted graph or

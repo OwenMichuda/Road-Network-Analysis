@@ -29,6 +29,16 @@ void load_files() {
   g.insertVertex(Vertex(6,6438,7631));
   g.insertVertex(Vertex(7,4591,7131));
   g.insertVertex(Vertex(8,1888,4120));
+
+  g.insertEdge(Vertex(0, 1000, 592), Vertex(2,7234, 6923));
+  g.insertEdge(Vertex(0, 1000, 592), Vertex(4,2359,4124));
+  g.insertEdge(Vertex(1,3486,1292), Vertex(6,6438,7631));
+  g.insertEdge(Vertex(1,3486,1292), Vertex(8,1888,4120));
+  g.insertEdge(Vertex(4,2359,4124), Vertex(0, 1000, 592));
+  g.insertEdge(Vertex(5,5329,3621), Vertex(1,3486,1292));
+  g.insertEdge(Vertex(5,5329,3621), Vertex(3,1245,8231));
+  g.insertEdge(Vertex(6,6438,7631), Vertex(5,5329,3621));
+  g.insertEdge(Vertex(6,6438,7631), Vertex(7,4591,7131));
 }
 
 TEST_CASE("Sanity Check", "[weight=1]") {
@@ -36,6 +46,7 @@ TEST_CASE("Sanity Check", "[weight=1]") {
 }
 
 TEST_CASE("BFS finds a valid path", "[weight=1]") {
+  load_files();
   Search s(g);
   vector<Vertex> v = g.getVertices();
   vector<Vertex> path = s.BFS(v[0], v[5]);
@@ -47,6 +58,7 @@ TEST_CASE("BFS finds a valid path", "[weight=1]") {
 }
 
 TEST_CASE("ASTAR finds a valid path", "[weight=1]") {
+  load_files();
   Search s(g);
   vector<Vertex> v = g.getVertices();
   vector<Vertex> path = s.astar(v[0], v[5]);
@@ -58,5 +70,15 @@ TEST_CASE("ASTAR finds a valid path", "[weight=1]") {
 }
 
 TEST_CASE("ASTAR found correct path", "[weight=1]") {
+  load_files();
+  Search s(g);
+  vector<Vertex> v = g.getVertices();
+  vector<Vertex> path = s.astar(v[0], v[5]);
 
+  vector<Vertex> correct;
+
+  REQUIRE(path.size() == correct.size());
+  for (int i = 0; i < path.size(); i++) {
+    REQUIRE(path[i] == correct[i]);
+  }
 }
