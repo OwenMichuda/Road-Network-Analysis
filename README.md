@@ -8,3 +8,6 @@ Our objective for this project was to use a BFS (breadth first search) and the A
 
 ### Sample Data Set
 See oldenberg data set [here](https://www.cs.utah.edu/~lifeifei/research/tpq/OL.cedge).
+
+### Video Run-through
+Watch on [Youtube](https://www.youtube.com/watch?v=ZoG5jJ3E8rg).
