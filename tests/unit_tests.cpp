@@ -73,7 +73,7 @@ TEST_CASE("BFS finds shortest path", "[weight=1]") {
   graph.insertEdge(Vertex(7), Vertex(8));
 
   Search search(graph);
-  vector<Vertex> path = {Vertex(0), Vertex(2), Vertex(3), Vertex(7), Vertex(8)};
+  vector<Vertex> path = {Vertex(0), Vertex(2), Vertex(3), Vertex(5), Vertex(8)};
 
   REQUIRE(path == search.BFS(Vertex(0), Vertex(8)));
 }
@@ -88,10 +88,18 @@ TEST_CASE("astar finds shortest path", "[weight=1]") {
   graph.insertVertex(Vertex(3, 3, 3));
 
   graph.insertEdge(Vertex(0, 0, 0), Vertex(1, 2, 1));
-  graph.insertEdge(Vertex(0, 0, 0), Vertex(2, 1, 3));
-  graph.insertEdge(Vertex(1, 2, 1), Vertex(3, 3, 3));
-  graph.insertEdge(Vertex(2, 1, 3), Vertex(3, 3, 3));
+  graph.setEdgeWeight(Vertex(0, 0, 0), Vertex(1, 2, 1), 2.2361);
 
+  graph.insertEdge(Vertex(0, 0, 0), Vertex(2, 1, 3));
+  graph.setEdgeWeight(Vertex(0, 0, 0), Vertex(2, 1, 3), 3.1623);
+
+  graph.insertEdge(Vertex(1, 2, 1), Vertex(3, 3, 3));
+  graph.setEdgeWeight(Vertex(1, 2, 1), Vertex(3, 3, 3), 2.2361);
+
+  graph.insertEdge(Vertex(2, 1, 3), Vertex(3, 3, 3));
+  graph.setEdgeWeight(Vertex(2, 1, 3), Vertex(3, 3, 3), 2);
+
+  REQUIRE(graph.getAdjacent(Vertex(0, 0, 0)).size() == 2);
 
   SECTION("Simple Graph") {
     vector<Vertex> path = {Vertex(0, 0, 0), Vertex(1, 2, 1), Vertex(3, 3, 3)};

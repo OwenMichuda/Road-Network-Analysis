@@ -342,7 +342,7 @@ Edge Graph::removeEdge(Vertex source, Vertex destination)
 }
 
 
-Edge Graph::setEdgeWeight(Vertex source, Vertex destination, int weight)
+Edge Graph::setEdgeWeight(Vertex source, Vertex destination, double weight)
 {
     if (assertEdgeExists(source, destination, __func__) == false)
         return InvalidEdge;
