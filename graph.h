@@ -52,6 +52,9 @@ using std::unordered_map;
 
 using std::ifstream;
 
+#include "cs225/PNG.h"
+#include "cs225/HSLAPixel.h"
+
 
 /**
  * Represents a graph; used by the GraphTools class.
@@ -231,6 +234,12 @@ public:
      * Prints the graph to stdout.
      */
     void print() const;
+
+    
+    /** 
+    * Render graph onto png of map
+    */
+    void Graph::render(Graph g, cs225::PNG png) const;
 
     /**
      * Saves the graph as a PNG image.
