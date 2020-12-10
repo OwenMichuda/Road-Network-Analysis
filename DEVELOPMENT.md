@@ -26,5 +26,8 @@ The second week of development occurred after Thanksgiving break. We met over Zo
 ### 12/7
 - Met with team.
 - Makefile created.
-- Preliminary test suites created.
+- Preliminary test cases created.
 - Vertex file created.
+### 12/9
+- Started work on BFS and A* methods.
+- Continued work on test cases
