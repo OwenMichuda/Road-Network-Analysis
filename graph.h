@@ -224,18 +224,6 @@ public:
      */
     void savePNG(string title) const;
 
-    /**
-     * Finds the shortest path between two vertices using BFS.
-     * @return - the shortest path
-     */
-    vector<Vertex> BFS(Vertex start, Vertex end);
-
-    /**
-     * Finds the shortest path between two vertices using astar.
-     * @return - the shortest path
-     */
-    vector<Vertex> astar(Vertex start, Vertex end);
-
     bool isDirected() const;
 
     void clear();

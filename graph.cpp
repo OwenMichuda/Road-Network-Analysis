@@ -502,20 +502,4 @@ void Graph::savePNG(string title) const
     string rmCommand = "rm -f " + filename + " 2> /dev/null";
     system(rmCommand.c_str());
     */
-
-   /**
-     * Finds the shortest path between two vertices using BFS.
-     * @return - the shortest path
-     */
-    vector<Vertex> Graph::BFS(Vertex start, Vertex end) {
-
-    }
-
-    /**
-     * Finds the shortest path between two vertices using astar.
-     * @return - the shortest path
-     */
-    vector<Vertex> Graph::astar(Vertex start, Vertex end) {
-
-    }
 }
