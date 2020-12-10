@@ -51,34 +51,6 @@ TEST_CASE("CSV Graph Constructor", "[weight=1]") {
   REQUIRE(correct_edges == edges);
 }
 
-TEST_CASE("BFS finds a valid path", "[weight=1]") {
-  // hania: modify as necessary to test bfs
-  Graph g("test_connections.csv", "test_vertices.csv", true);
-  Search s(g);
-  
-  vector<Vertex> v = g.getVertices();
-  vector<Vertex> path = s.BFS(v[0], v[5]);
-  REQUIRE(!path.empty());
-  REQUIRE(path[0].getX() == v[0].getX());
-  REQUIRE(path[0].getY() == v[0].getY());
-  REQUIRE(path[path.size() - 1].getX() == v[5].getX());
-  REQUIRE(path[path.size() - 1].getY() == v[5].getY());
-}
-
-TEST_CASE("ASTAR finds a valid path", "[weight=1]") {
-  // hania
-  Graph g("test_connections.csv", "test_vertices.csv", true);
-  Search s(g);
-
-  vector<Vertex> v = g.getVertices();
-  vector<Vertex> path = s.astar(v[0], v[5]);
-  REQUIRE(!path.empty());
-  REQUIRE(path[0].getX() == v[0].getX());
-  REQUIRE(path[0].getY() == v[0].getY());
-  REQUIRE(path[path.size() - 1].getX() == v[5].getX());
-  REQUIRE(path[path.size() - 1].getY() == v[5].getY());
-}
-
 TEST_CASE("BFS finds shortest path", "[weight=1]") {
   Graph graph(false);
   for (int i = 0; i < 9; i++) {

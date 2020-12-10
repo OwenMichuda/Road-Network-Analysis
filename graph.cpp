@@ -6,7 +6,7 @@ const string Graph:: InvalidLabel = "_CS225INVALIDLABEL";
 const Edge Graph::InvalidEdge = Edge(Graph::InvalidVertex, Graph::InvalidVertex, Graph::InvalidWeight, Graph::InvalidLabel);
 
 Graph::Graph(string connections_file, string vertices_file, bool weighted) 
-    : random(Random(0)), weighted(weighted), directed(false) {
+    : weighted(weighted), directed(false), random(Random(0)) {
     
     ifstream connections;
     ifstream vertices_stream;

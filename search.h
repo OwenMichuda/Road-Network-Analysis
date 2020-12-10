@@ -51,8 +51,8 @@ class Search {
 
         /** Predicate for priority queue */
         struct NodeComparison {
-            bool operator()(const Node& lhs, const Node& rhs) const {
-                return lhs.priority < rhs.priority;
+            bool operator()(const Node* lhs, const Node* rhs) const {
+                return lhs->priority < rhs->priority;
             }
         };
 };

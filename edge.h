@@ -103,7 +103,7 @@ class Edge
      * Compares two edges' source and dest.
      * @param other - the edge to compare with
      */
-    bool operator==(Edge& other) const
+    bool operator==(const Edge& other) const
     {
         if (this->source != other.source)
             return false;

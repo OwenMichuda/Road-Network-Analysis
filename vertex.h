@@ -38,7 +38,10 @@ class Vertex {
 			return index < other.index;
 		}
 
-		friend std::ostream& operator<<(std::ostream& os, const Vertex& obj);
+		friend std::ostream& operator<<(std::ostream& os, const Vertex& obj) {
+			os << obj.getIndex();
+			return os;
+		}
 
     private:
         int index;
@@ -53,7 +56,3 @@ struct std::hash<Vertex> {
 	}	
 };
 
-std::ostream& operator<<(std::ostream& os, const Vertex& obj) {
-	os << obj.getIndex();
-	return os;
-}
