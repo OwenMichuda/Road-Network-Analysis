@@ -45,40 +45,50 @@ TEST_CASE("Sanity Check", "[weight=1]") {
   REQUIRE(1 + 1 == 2);
 }
 
-TEST_CASE("BFS finds a valid path", "[weight=1]") {
-  load_files();
-  Search s(g);
-  vector<Vertex> v = g.getVertices();
-  vector<Vertex> path = s.BFS(v[0], v[5]);
-  REQUIRE(!path.empty());
-  REQUIRE(path[0].getX() == v[0].getX());
-  REQUIRE(path[0].getY() == v[0].getY());
-  REQUIRE(path[path.size() - 1].getX() == v[5].getX());
-  REQUIRE(path[path.size() - 1].getY() == v[5].getY());
+TEST_CASE("BFS finds shortest path", "[weight=1]") {
+  Graph graph(false);
+  for (int i = 0; i < 9; i++) {
+    Vertex v = Vertex(i);
+    graph.insertVertex(v);
+  }
+
+  graph.insertEdge(Vertex(0), Vertex(1));
+  graph.insertEdge(Vertex(0), Vertex(2));
+  graph.insertEdge(Vertex(1), Vertex(3));
+  graph.insertEdge(Vertex(1), Vertex(4));
+  graph.insertEdge(Vertex(2), Vertex(3));
+  graph.insertEdge(Vertex(3), Vertex(4));
+  graph.insertEdge(Vertex(3), Vertex(5));
+  graph.insertEdge(Vertex(3), Vertex(7));
+  graph.insertEdge(Vertex(4), Vertex(6));
+  graph.insertEdge(Vertex(5), Vertex(8));
+  graph.insertEdge(Vertex(5), Vertex(6));
+  graph.insertEdge(Vertex(6), Vertex(8));
+  graph.insertEdge(Vertex(7), Vertex(8));
+
+  Search search(graph);
+  vector<Vertex> path = {Vertex(0), Vertex(2), Vertex(3), Vertex(7), Vertex(8)};
+
+  REQUIRE(path == search.BFS(Vertex(0), Vertex(8)));
 }
 
-TEST_CASE("ASTAR finds a valid path", "[weight=1]") {
-  load_files();
-  Search s(g);
-  vector<Vertex> v = g.getVertices();
-  vector<Vertex> path = s.astar(v[0], v[5]);
-  REQUIRE(!path.empty());
-  REQUIRE(path[0].getX() == v[0].getX());
-  REQUIRE(path[0].getY() == v[0].getY());
-  REQUIRE(path[path.size() - 1].getX() == v[5].getX());
-  REQUIRE(path[path.size() - 1].getY() == v[5].getY());
-}
+TEST_CASE("astar finds shortest path", "[weight=1]") {
+  Graph graph(true, false);
+  Search search(graph);
 
-TEST_CASE("ASTAR found correct path", "[weight=1]") {
-  load_files();
-  Search s(g);
-  vector<Vertex> v = g.getVertices();
-  vector<Vertex> path = s.astar(v[0], v[5]);
+  graph.insertVertex(Vertex(0, 0, 0));
+  graph.insertVertex(Vertex(1, 2, 1));
+  graph.insertVertex(Vertex(2, 1, 3));
+  graph.insertVertex(Vertex(3, 3, 3));
 
-  vector<Vertex> correct;
+  graph.insertEdge(Vertex(0, 0, 0), Vertex(1, 2, 1));
+  graph.insertEdge(Vertex(0, 0, 0), Vertex(2, 1, 3));
+  graph.insertEdge(Vertex(1, 2, 1), Vertex(3, 3, 3));
+  graph.insertEdge(Vertex(2, 1, 3), Vertex(3, 3, 3));
 
-  REQUIRE(path.size() == correct.size());
-  for (int i = 0; i < path.size(); i++) {
-    REQUIRE(path[i] == correct[i]);
+
+  SECTION("Simple Graph") {
+    vector<Vertex> path = {Vertex(0, 0, 0), Vertex(1, 2, 1), Vertex(3, 3, 3)};
+    REQUIRE(path == search.astar(Vertex(0, 0, 0), Vertex(3, 3, 3)));
   }
 }
