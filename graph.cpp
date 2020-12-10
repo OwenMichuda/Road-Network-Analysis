@@ -465,6 +465,55 @@ void Graph::print() const
     }
 }
 
+/** 
+ * Render graph onto png of map
+ */
+void Graph::render(Graph g, cs225::PNG png) const {
+    // go through vertices and edges of graph
+    // edit png to one color if it's a vertex and another if its an edge
+    // for every vertice, set the pixel at that x and y to be a color
+    // for every edge, not sure yet but perhaps get the weight and then change x and y for that length (for loop ?) to different color
+        // find slope of edges to get x distance and y distance
+
+    // get vector of adjacent vertices, find geometric distance between source vertex
+        // and each of its adjacent ones
+    // get adjacent vertices for each v, find distance between them, 
+        // color each pixel along edge
+    vector<Vertex> vertices = g.getVertices();
+    //vector<Edge> edges = g.getEdges();
+    double dx = 0.0;
+    double dy = 0.0;
+    double y;
+    for (Vertex v : vertices) {
+        // get the x and y
+        double x_coor = v.getX();
+        double y_coor = v.getY();
+        // set the color of the correlating pixel (of the png)
+        cs225::HSLAPixel& pixel = png.getPixel(x_coor, y_coor);
+        pixel.h = 156;
+        pixel.s = 1;
+        pixel.l = 0.22;
+        pixel.a = 1;
+        vector<Vertex> adjacent = g.getAdjacent(v);
+        for (Vertex a : adjacent) {
+            //dist = sqrt((pow(v.getX() - a.getX(), 2)) + (pow(v.getY() - a.getY(), 2)));
+            // compute slope
+            dx = v.getX() - a.getX();
+            dy = v.getY() - a.getY();
+            for (double x = a.getX(); x <= v.getX(); x++) {
+                y = a.getY() + dy * (x - a.getX()) / dx;
+                // access every y associated with every x to get every pixel
+                cs225::HSLAPixel& pixel = png.getPixel(x, y);
+                // change color
+                pixel.h = 0;
+                pixel.s = 1;
+                pixel.l = 0.32;
+                pixel.a = 1;
+            }
+        }
+    }
+}
+
 /**
  * Saves the graph as a PNG image.
  * @param title - the filename of the PNG image
