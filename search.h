@@ -16,7 +16,7 @@ using std::vector;
 
 class Search {
     public:
-        Search(Graph g) : graph(g) {}
+        Search(Graph& g) : graph(g) {}
 
         
         /**
