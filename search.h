@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <queue>
+#include <algorithm>
 
 #include "vertex.h"
 #include "graph.h"

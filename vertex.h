@@ -27,6 +27,10 @@ class Vertex {
         bool operator!=(const Vertex& other) const {
             return index != other.index || x_ != other.x_ || y_ != other.y_;
         }
+
+        bool operator==(const Vertex& other) const {
+            return !(*this != other);
+        }
     private:
         int index;
         double x_;
