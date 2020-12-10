@@ -34,12 +34,25 @@ class Search {
     private:
         Graph graph;
 
+        /** Helper function to compute the heuristic for astar. */
+        double heuristic(Vertex current, Vertex end);
+
         struct Node {
             Node() {}
             Node(Vertex curr, Node* prev) : current(curr), previous(prev) {}
-            // bool operator!=(const Node& other) const { return current != other.current || previous != other.previous}
+            Node(Vertex curr, Node* prev, double c, double p) : current(curr), previous(prev),
+             cost(c), priority(p) {}
 
             Vertex current;
             Node* previous;
+            double cost;
+            double priority;
+        };
+
+        /** Predicate for priority queue */
+        struct NodeComparison {
+            bool operator()(const Node& lhs, const Node& rhs) const {
+                return lhs.priority < rhs.priority;
+            }
         };
 };
