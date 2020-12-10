@@ -239,7 +239,7 @@ public:
     /** 
     * Render graph onto png of map
     */
-    void Graph::render(Graph g, cs225::PNG png) const;
+    void render(Graph g, cs225::PNG png) const;
 
     /**
      * Saves the graph as a PNG image.
