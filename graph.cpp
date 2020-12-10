@@ -5,10 +5,11 @@ const int Graph::InvalidWeight = INT_MIN;
 const string Graph:: InvalidLabel = "_CS225INVALIDLABEL";
 const Edge Graph::InvalidEdge = Edge(Graph::InvalidVertex, Graph::InvalidVertex, Graph::InvalidWeight, Graph::InvalidLabel);
 
-Graph::Graph(string connections_file, string vertices_file) {
+Graph::Graph(string connections_file, string vertices_file) : random(Random(0)) {
 
     weighted = true;
     directed = false;
+	
     
     ifstream connections;
     ifstream vertices_stream;
@@ -150,11 +151,11 @@ vector<Vertex> Graph::getAdjacent(Vertex source) const
 
     if(lookup == adjacency_list.end())
         return vector<Vertex>();
-
-    else
+	
+     else
     {
         vector<Vertex> vertex_list;
-        unordered_map <Vertex, Edge> & map = adjacency_list[source];
+        const unordered_map <Vertex, Edge> & map = adjacency_list[source];
         for (auto it = map.begin(); it != map.end(); it++)
         {
             vertex_list.push_back(it->first);

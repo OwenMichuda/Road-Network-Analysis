@@ -1,15 +1,10 @@
-# Taken from cs225 lab_ml and updated for our purposes
-
 # Executable names:
-EXE = eedowdy2-haniakd2-fkabba2-jamesom2
+EXE = finalproj
 TEST = test
 
 # Add all object files needed for compiling:
 EXE_OBJ = main.o
-OBJS = graph.o main.o
-
-# Generated files
-CLEAN_RM = images/Out.png
+OBJS = graph.o main.o search.o
 
 # Use the cs225 makefile template:
 include cs225/make/cs225.mk

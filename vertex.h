@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <iostream>
+
 class Vertex {
     public:
         Vertex() {}
@@ -31,13 +33,27 @@ class Vertex {
         bool operator==(const Vertex& other) const {
             return !(*this != other);
         }
+
+		bool operator<(const Vertex& other) const {
+			return index < other.index;
+		}
+
+		friend std::ostream& operator<<(std::ostream& os, const Vertex& obj);
+
     private:
         int index;
         double x_;
         double y_;
 };
 
+template<>
+struct std::hash<Vertex> {
+	size_t operator()(const Vertex & v) const {
+		return std::hash<int>{}(v.getIndex()); 
+	}	
+};
+
 std::ostream& operator<<(std::ostream& os, const Vertex& obj) {
-    os << obj.getIndex();
-    return os;
+	os << obj.getIndex();
+	return os;
 }

@@ -36,6 +36,7 @@
 
 #include "edge.h"
 #include "random.h"
+#include "vertex.h"
 
 using std::cerr;
 using std::cout;
@@ -239,6 +240,25 @@ public:
     const static string InvalidLabel;
 
 private:
+
+/*
+	template <typename Vertex>
+	struct hashFunction {
+	public:
+		size_t operator()(const Vertex& v) const {
+			return std::hash<int>{}(v.getIndex());
+		}
+	};
+
+	template <typename Vertex>
+	struct equalsFunction {
+	public:
+		bool operator() (const Vertex& lhs, const Vertex& rhs) const{
+			return lhs.getIndex() == rhs.getIndex();
+		}
+	};
+	*/
+
     mutable unordered_map<Vertex, unordered_map<Vertex, Edge>> adjacency_list;
 
     bool weighted;
