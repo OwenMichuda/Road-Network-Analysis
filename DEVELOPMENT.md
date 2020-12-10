@@ -29,5 +29,6 @@ The second week of development occurred after Thanksgiving break. We met over Zo
 - Preliminary test cases created.
 - Vertex file created.
 ### 12/9
-- Started work on BFS and A* methods.
-- Continued work on test cases
+- Completed intial BFS and A* methods.
+- Continued work on test cases.
+- Created new constructor in Graph class that takes two csv files and makes a graph out of them
