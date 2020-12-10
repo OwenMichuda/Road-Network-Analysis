@@ -5,10 +5,8 @@ const int Graph::InvalidWeight = INT_MIN;
 const string Graph:: InvalidLabel = "_CS225INVALIDLABEL";
 const Edge Graph::InvalidEdge = Edge(Graph::InvalidVertex, Graph::InvalidVertex, Graph::InvalidWeight, Graph::InvalidLabel);
 
-Graph::Graph(string connections_file, string vertices_file) : random(Random(0)) {
-
-    weighted = true;
-    directed = false;
+Graph::Graph(string connections_file, string vertices_file, bool weighted) 
+    : random(Random(0)), weighted(weighted), directed(false) {
     
     ifstream connections;
     ifstream vertices_stream;
@@ -17,8 +15,8 @@ Graph::Graph(string connections_file, string vertices_file) : random(Random(0)) 
 
     string line;
     vector<Vertex> vertex_v;
+    string delim = ",";
     while (getline(vertices_stream, line)) {
-        string delim = ",";
         string index = line.substr(0, line.find(delim));
         std::stringstream idx(index);
         int i;
@@ -40,7 +38,6 @@ Graph::Graph(string connections_file, string vertices_file) : random(Random(0)) 
 
     string n;
     while (getline(connections, n)) {
-        string delim = ",";
         string index = n.substr(0, n.find(delim));
         std::stringstream idx(index);
         int i;
@@ -73,7 +70,7 @@ Graph::Graph(string connections_file, string vertices_file) : random(Random(0)) 
         }
 
         insertEdge(start, end);
-        setEdgeWeight(start, end, w);
+        if (weighted) setEdgeWeight(start, end, w);
     }
 }
 

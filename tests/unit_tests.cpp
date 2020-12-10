@@ -19,7 +19,7 @@ TEST_CASE("Sanity Check", "[weight=1]") {
 }
 
 TEST_CASE("CSV Graph Constructor", "[weight=1]") {
-  Graph g("test_connections.csv", "test_vertices.csv");
+  Graph g("test_connections.csv", "test_vertices.csv", true);
 
   vector<Vertex> vertices = g.getVertices();
 
@@ -53,7 +53,7 @@ TEST_CASE("CSV Graph Constructor", "[weight=1]") {
 
 TEST_CASE("BFS finds a valid path", "[weight=1]") {
   // hania: modify as necessary to test bfs
-  Graph g("test_connections.csv", "test_vertices.csv");
+  Graph g("test_connections.csv", "test_vertices.csv", true);
   Search s(g);
   
   vector<Vertex> v = g.getVertices();
@@ -67,7 +67,7 @@ TEST_CASE("BFS finds a valid path", "[weight=1]") {
 
 TEST_CASE("ASTAR finds a valid path", "[weight=1]") {
   // hania
-  Graph g("test_connections.csv", "test_vertices.csv");
+  Graph g("test_connections.csv", "test_vertices.csv", true);
   Search s(g);
 
   vector<Vertex> v = g.getVertices();

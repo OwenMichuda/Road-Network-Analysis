@@ -60,7 +60,16 @@ class Graph
 {
 public:
 
-    Graph(string connections_file, string vertices_file);
+    /**
+     * Constructor to create a graph from a CSV file of vertices 
+     * (index, x coordinate, y coordinate), and a CSV file of connections
+     * (index, first vertex, second vertex, weight).
+     * @param connections_file - path of connections CSV file
+     * @param vertices_files - path of vertices CSV file
+     * @param weighted - specifies whether the graph is weighted
+     */
+    Graph(string connections_file, string vertices_file, bool weighted);
+
     /**
      * Constructor to create an empty graph.
      * @param weighted - specifies whether the graph is a weighted graph or
