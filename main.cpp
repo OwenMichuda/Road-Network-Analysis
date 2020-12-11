@@ -4,23 +4,26 @@
 #include <vector>
 
 #include "vertex.h"
+#include "graph.h"
 
 using namespace std;
 
 int main() {
 	// read data csv files
-	string connections_file = "connections_test_data.csv";
-	string vertices_file = "vertices_test_data.csv";
-	
-	ifstream connections;
-	ifstream vertices;
-	vector<Vertex> vert_vec;
-	// iterate through csv file, creating edge object for each connection and adding to vector
-	connections.open(connections_file);
-	
-	while (!connections.eof()) {
+	string connections_file = "sampledata/connections_test_data.csv";
+	string vertices_file = "sampledata/vertices_test_data.csv";
 
+	Graph g(connections_file, vertices_file, true);
+
+	for (Vertex v : g.getVertices()) {
+		//cout << v.getIndex() << "\n";
 	}
+
+	for (Edge e : g.getEdges()) {
+		cout << e.getWeight() << "\n";
+	}
+	
+	vector<Vertex> vert_vec;
 
 
 

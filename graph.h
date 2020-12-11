@@ -239,7 +239,7 @@ public:
     /** 
     * Render graph onto png of map
     */
-    void Graph::render(Graph g, cs225::PNG png) const;
+    void render(Graph g, cs225::PNG png) const;
 
     /**
      * Saves the graph as a PNG image.
@@ -310,4 +310,7 @@ private:
      * @param message - the error message that is printed
      */
     void error(string message) const;
+
+    vector<Vertex> readVertexCSV(string filename);
+    vector<Edge> readConnectionsCSV(string filename, vector<Vertex> vertices);
 };
