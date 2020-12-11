@@ -31,9 +31,11 @@ TEST_CASE("CSV Graph Constructor", "[weight=1]") {
   correct.push_back(Vertex(1,3486,1292));
   correct.push_back(Vertex(0,1000,592));
 
-  REQUIRE(!vertices.empty());
-  REQUIRE(correct.size() == vertices.size());
-  REQUIRE(correct == vertices);
+  SECTION("Vertices correctness") {
+    REQUIRE(!vertices.empty());
+    REQUIRE(correct.size() == vertices.size());
+    REQUIRE(correct == vertices);
+  }
 
   vector<Edge> edges = g.getEdges();
 
@@ -46,9 +48,15 @@ TEST_CASE("CSV Graph Constructor", "[weight=1]") {
   correct_edges.push_back(Edge(Vertex(1,3486,1292), Vertex(2,7234,6923), 4, ""));
   correct_edges.push_back(Edge(Vertex(0,1000,592), Vertex(1,3486,1292), 20, ""));
 
-  REQUIRE(!edges.empty());
-  REQUIRE(correct_edges.size() == edges.size());
-  REQUIRE(edges[0].getWeight() == 19);
+  SECTION("Edges correctness") {
+    REQUIRE(!edges.empty());
+    REQUIRE(correct_edges.size() == edges.size());
+    REQUIRE(edges[0].getWeight() == 19);
+    for (Edge e : edges) {
+      REQUIRE(e.dest.getIndex() != -1);
+      REQUIRE(e.source.getIndex() != -1);
+    }
+  }
 }
 
 TEST_CASE("BFS finds shortest path", "[weight=1]") {

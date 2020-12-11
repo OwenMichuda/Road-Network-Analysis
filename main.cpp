@@ -14,14 +14,6 @@ int main() {
 	string vertices_file = "sampledata/vertices_test_data.csv";
 
 	Graph g(connections_file, vertices_file, true);
-
-	for (Vertex v : g.getVertices()) {
-		//cout << v.getIndex() << "\n";
-	}
-
-	for (Edge e : g.getEdges()) {
-		cout << e.getWeight() << "\n";
-	}
 	
 	vector<Vertex> vert_vec;
 
