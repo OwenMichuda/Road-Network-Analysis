@@ -310,4 +310,7 @@ private:
      * @param message - the error message that is printed
      */
     void error(string message) const;
+
+    vector<Vertex> readVertexCSV(string filename);
+    vector<Edge> readConnectionsCSV(string filename, vector<Vertex> vertices);
 };

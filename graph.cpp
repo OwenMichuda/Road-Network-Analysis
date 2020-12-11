@@ -7,71 +7,108 @@ const Edge Graph::InvalidEdge = Edge(Graph::InvalidVertex, Graph::InvalidVertex,
 
 Graph::Graph(string connections_file, string vertices_file, bool weighted) 
     : weighted(weighted), directed(false), random(Random(0)) {
-    
-    ifstream connections;
-    ifstream vertices_stream;
-    connections.open(connections_file);
-    vertices_stream.open(vertices_file);
 
-    string line;
-    vector<Vertex> vertex_v;
-    string delim = ",";
-    while (getline(vertices_stream, line)) {
-        string index = line.substr(0, line.find(delim));
-        std::stringstream idx(index);
-        int i;
-        idx >> i;
-
-        string x_coor = line.substr(1, line.find(delim));
-        std::stringstream x_str(x_coor);
-        double x;
-        x_str >> x;
-
-        string y_coor = line.substr(2, line.find(delim));
-        std::stringstream y_str(y_coor);
-        double y;
-        y_str >> y;
-
-        insertVertex(Vertex(i, x, y));
-        vertex_v.push_back(Vertex(i, x, y));
+    vector<Vertex> vertex_v = readVertexCSV(vertices_file);
+    for (Vertex v : vertex_v) {
+        insertVertex(v);
     }
 
-    string n;
-    while (getline(connections, n)) {
-        string index = n.substr(0, n.find(delim));
-        std::stringstream idx(index);
-        int i;
-        idx >> i;
+    vector<Edge> edge_v = readConnectionsCSV(connections_file, vertex_v);
+    for (Edge e : edge_v) {
+        insertEdge(e.source, e.dest);
+        setEdgeWeight(e.source, e.dest, e.getWeight());
+    }
+}
 
-        string vertex1 = n.substr(1, n.find(delim));
-        std::stringstream ver1(vertex1);
-        int v1;
-        ver1 >> v1;
+vector<Vertex> Graph::readVertexCSV(string filename) {
+    string line;
+    vector<Vertex> result;
+
+    ifstream file(filename);
+
+    if (!file) {
+        cout << "Vertices file does not exist.";
+        exit(0);
+    }
+
+    while (getline(file, line)) {
+        size_t start;
+        size_t end = 0;
         
-        string vertex2 = n.substr(2, n.find(delim));
-        std::stringstream ver2(vertex2);
-        int v2;
-        ver2 >> v2;
-
-        string weight = n.substr(3, n.find(delim));
-        std::stringstream we(weight);
-        int w;
-        we >> w;
-
-        Vertex start;
-        Vertex end;
-        for(Vertex vx : vertex_v) {
-            if (vx.getIndex() == v1) {
-                start = vx;
-            }
-            if (vx.getIndex() == v2) {
-                end = vx;
-            }
+        int idx, x, y;
+        vector<string> out;
+        while ((start = line.find_first_not_of(',', end)) != std::string::npos) {
+            end = line.find(',', start);
+            out.push_back(line.substr(start, end - start));
         }
 
-        insertEdge(start, end);
-        if (weighted) setEdgeWeight(start, end, w);
+        if (out.size() != 3) cout << "no";
+
+        std::stringstream index(out[0]);
+        std::stringstream x_str(out[1]);
+        std::stringstream y_str(out[2]);
+
+        index >> idx;
+        y_str >> y;
+        x_str >> x;
+
+        Vertex v(idx, x, y);
+        result.push_back(v);
     }
+    return result;
+}
+
+vector<Edge> Graph::readConnectionsCSV(string filename, vector<Vertex> vertices) {
+    string line;
+    vector<Edge> result;
+
+    ifstream file(filename);
+
+    if (!file) {
+        cout << "Connections file does not exist.";
+        exit(0);
+    }
+
+    while (getline(file, line)) {
+        size_t start;
+        size_t end = 0;
+        
+        int idx, v1, v2, w;
+        vector<string> out;
+        while ((start = line.find_first_not_of(',', end)) != std::string::npos) {
+            end = line.find(',', start);
+            out.push_back(line.substr(start, end - start));
+        }
+
+        if (out.size() != 4) cout << "no";
+
+        std::stringstream index(out[0]);
+        std::stringstream v1_str(out[1]);
+        std::stringstream v2_str(out[2]);
+        std::stringstream weight(out[3]);
+
+        index >> idx;
+        v1_str >> v1;
+        v2_str >> v2;
+        weight >> w;
+
+        Vertex one(-1);
+        Vertex two(-1);
+
+        for (Vertex v : vertices) {
+            if (v.getIndex() == v1) {
+                one = v;
+            } else if (v.getIndex() == v2) {
+                two = v;
+            }
+
+            if (one.getIndex() != -1 && two.getIndex() != -1) break;
+        }
+
+        Edge e(one, two, w, "");
+        result.push_back(e);
+    }
+    return result;
 }
 
 Graph::Graph(bool weighted) : weighted(weighted),directed(false),random(Random(0))

@@ -19,14 +19,12 @@ int main() {
 	cs225::PNG png;
 	png.readFromFile("mappng.png");
 
-	cout << g.getVertices().empty();
-	cout << "Made project";
-
 	vector<Vertex> vert_vec;
 
 	cs225::PNG toReturn = g.render(g, png);
 	toReturn.writeToFile("outputMap.png");
 	
+	vector<Vertex> vert_vec;
 
 
 
