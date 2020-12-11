@@ -23,11 +23,9 @@ int main() {
 
 	cs225::PNG toReturn = g.render(g, png);
 	toReturn.writeToFile("outputMap.png");
+
+
 	
-	vector<Vertex> vert_vec;
-
-
-
 	// create map object from file
 	return 0;
 }
