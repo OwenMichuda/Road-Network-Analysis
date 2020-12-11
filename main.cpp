@@ -17,12 +17,15 @@ int main() {
 	Graph g(connections_file, vertices_file, true);
 	
 	cs225::PNG png;
-	png.readFromFile("mappng.png");
+	png.readFromFile("newBackground.png");
 
-	vector<Vertex> vert_vec;
+	//vector<Vertex> vert_vec;
 
 	cs225::PNG toReturn = g.render(g, png);
 	toReturn.writeToFile("outputMap.png");
+	
+	//vector<Vertex> vert_vec;
+
 
 
 	

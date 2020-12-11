@@ -523,14 +523,16 @@ cs225::PNG Graph::render(Graph g, cs225::PNG png) const {
     double y;
     for (Vertex v : vertices) {
         // get the x and y
+        /*
         double x_coor = v.getX();
         double y_coor = v.getY();
-        // set the color of the correlating pixel (of the png)
+        // set the color of the correlating pixel (of the png) to green
         cs225::HSLAPixel& pixel = png.getPixel(x_coor, y_coor);
         pixel.h = 156;
         pixel.s = 1;
         pixel.l = 0.22;
         pixel.a = 1;
+        */
         vector<Vertex> adjacent = g.getAdjacent(v);
         for (Vertex a : adjacent) {
             //dist = sqrt((pow(v.getX() - a.getX(), 2)) + (pow(v.getY() - a.getY(), 2)));
@@ -541,13 +543,23 @@ cs225::PNG Graph::render(Graph g, cs225::PNG png) const {
                 y = a.getY() + dy * (x - a.getX()) / dx;
                 // access every y associated with every x to get every pixel
                 cs225::HSLAPixel& pixel = png.getPixel(x, y);
-                // change color
-                pixel.h = 0;
+                // change color to black
+                pixel.h = 226;
                 pixel.s = 1;
-                pixel.l = 0.32;
+                pixel.l = 0;
                 pixel.a = 1;
             }
         }
+    }
+    for (Vertex v : vertices) {
+        double x_coor = v.getX();
+        double y_coor = v.getY();
+        // set the color of the correlating pixel (of the png) to pink
+        cs225::HSLAPixel& pixel = png.getPixel(x_coor, y_coor);
+        pixel.h = 328;
+        pixel.s = 1;
+        pixel.l = 0.76;
+        pixel.a = 1;
     }
     return png;
 }
