@@ -5,20 +5,27 @@
 
 #include "vertex.h"
 #include "graph.h"
+#include "cs225/PNG.h"
 
 using namespace std;
 
 int main() {
 	// read data csv files
-	string connections_file = "connections_test_data.csv";
-	string vertices_file = "vertices_test_data.csv";
+	string connections_file = "sampledata/oldenburg_road_network.csv";
+	string vertices_file = "sampledata/OL_road_coords.csv";
 	
 	Graph g(connections_file, vertices_file, true);
+	
+	cs225::PNG png;
+	png.readFromFile("mappng.png");
 
 	cout << g.getVertices().empty();
 	cout << "Made project";
 
 	vector<Vertex> vert_vec;
+
+	cs225::PNG toReturn = g.render(g, png);
+	toReturn.writeToFile("outputMap.png");
 	
 
 

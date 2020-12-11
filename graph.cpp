@@ -468,7 +468,7 @@ void Graph::print() const
 /** 
  * Render graph onto png of map
  */
-void Graph::render(Graph g, cs225::PNG png) const {
+cs225::PNG Graph::render(Graph g, cs225::PNG png) const {
     // go through vertices and edges of graph
     // edit png to one color if it's a vertex and another if its an edge
     // for every vertice, set the pixel at that x and y to be a color
@@ -512,6 +512,7 @@ void Graph::render(Graph g, cs225::PNG png) const {
             }
         }
     }
+    return png;
 }
 
 /**
