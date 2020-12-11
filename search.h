@@ -32,7 +32,7 @@ class Search {
         vector<Vertex> astar(Vertex start, Vertex end);
 
     private:
-        Graph graph;
+        Graph& graph;
 
         /** Helper function to compute the heuristic for astar. */
         double heuristic(Vertex current, Vertex end);

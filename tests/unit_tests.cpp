@@ -73,7 +73,7 @@ TEST_CASE("BFS finds shortest path", "[weight=1]") {
   graph.insertEdge(Vertex(7), Vertex(8));
 
   Search search(graph);
-  vector<Vertex> path = {Vertex(0), Vertex(2), Vertex(3), Vertex(7), Vertex(8)};
+  vector<Vertex> path = {Vertex(0), Vertex(2), Vertex(3), Vertex(5), Vertex(8)};
 
   REQUIRE(path == search.BFS(Vertex(0), Vertex(8)));
 }
@@ -88,13 +88,47 @@ TEST_CASE("astar finds shortest path", "[weight=1]") {
   graph.insertVertex(Vertex(3, 3, 3));
 
   graph.insertEdge(Vertex(0, 0, 0), Vertex(1, 2, 1));
-  graph.insertEdge(Vertex(0, 0, 0), Vertex(2, 1, 3));
-  graph.insertEdge(Vertex(1, 2, 1), Vertex(3, 3, 3));
-  graph.insertEdge(Vertex(2, 1, 3), Vertex(3, 3, 3));
+  graph.setEdgeWeight(Vertex(0, 0, 0), Vertex(1, 2, 1), 2.2361);
 
+  graph.insertEdge(Vertex(0, 0, 0), Vertex(2, 1, 3));
+  graph.setEdgeWeight(Vertex(0, 0, 0), Vertex(2, 1, 3), 3.1623);
+
+  graph.insertEdge(Vertex(1, 2, 1), Vertex(3, 3, 3));
+  graph.setEdgeWeight(Vertex(1, 2, 1), Vertex(3, 3, 3), 2.2361);
+
+  graph.insertEdge(Vertex(2, 1, 3), Vertex(3, 3, 3));
+  graph.setEdgeWeight(Vertex(2, 1, 3), Vertex(3, 3, 3), 2);
+
+  REQUIRE(graph.getAdjacent(Vertex(0, 0, 0)).size() == 2);
 
   SECTION("Simple Graph") {
     vector<Vertex> path = {Vertex(0, 0, 0), Vertex(1, 2, 1), Vertex(3, 3, 3)};
     REQUIRE(path == search.astar(Vertex(0, 0, 0), Vertex(3, 3, 3)));
+  }
+
+  graph.insertVertex(Vertex(4, 4, 2));
+  graph.insertVertex(Vertex(5, 4, 5));
+  graph.insertVertex(Vertex(6, 2, 5));
+
+  graph.insertEdge(Vertex(1, 2, 1), Vertex(4, 4, 2));
+  graph.setEdgeWeight(Vertex(1, 2, 1), Vertex(4, 4, 2), 2.2361);
+
+  graph.insertEdge(Vertex(3, 3, 3), Vertex(5, 4, 5));
+  graph.setEdgeWeight(Vertex(3, 3, 3), Vertex(5, 4, 5), 2.2361);
+
+  graph.insertEdge(Vertex(2, 1, 3), Vertex(6, 2, 5));
+  graph.setEdgeWeight(Vertex(2, 1, 3), Vertex(6, 2, 5), 2.2361);
+
+  graph.insertEdge(Vertex(6, 2, 5), Vertex(5, 4, 5));
+  graph.setEdgeWeight(Vertex(6, 2, 5), Vertex(5, 4, 5), 2);
+
+  graph.insertEdge(Vertex(4, 4, 2), Vertex(5, 4, 5));
+  graph.setEdgeWeight(Vertex(4, 4, 2), Vertex(5, 4, 5), 3);
+
+  REQUIRE(graph.getEdges().size() == 9);
+
+  SECTION("More Complex Graph") {
+    vector<Vertex> path = {Vertex(0, 0, 0), Vertex(1, 2, 1), Vertex(3, 3, 3), Vertex(5, 4, 5)};
+    REQUIRE(path == search.astar(Vertex(0, 0, 0), Vertex(5, 4, 5)));
   }
 }
