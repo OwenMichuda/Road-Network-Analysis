@@ -99,12 +99,13 @@ double Search::heuristic(Vertex current, Vertex end) const {
  */ 
 cs225::PNG Search::drawPath(cs225::PNG png) const {
     Vertex start = graph.getVertices().at(0);
-    Vertex end = graph.getVertices().at(8);
+    Vertex end = graph.getVertices().at(5302);
 
     cs225::HSLAPixel green = cs225::HSLAPixel(151, 1, 0.45, 1);
     cs225::HSLAPixel pink = cs225::HSLAPixel(328, 1, 0.76, 1);
 
     vector<Vertex> bfs = BFS(start, end);
+	std::cout << "BFS length: " << bfs.size() << std::endl;
     auto it = bfs.begin(); 
     while (it != bfs.end()) {
         Vertex first = *it;
@@ -112,6 +113,93 @@ cs225::PNG Search::drawPath(cs225::PNG png) const {
 
         std::cout << first << std::endl;
 
+		double dx, dy, startX, endX, startY, endY;
+		if (std::abs(first.getX() - second.getX()) > std::abs(first.getY() - second.getY())) {
+			if (second.getY() > first.getY()) {
+				dy = second.getY() - first.getY();
+			} else {
+				dy = first.getY() - second.getY();
+			}
+
+			if (second.getX() > first.getX()) {
+				dx = second.getX() - first.getX();
+				startX = first.getX();
+				startY = first.getY();
+				endX = second.getX();
+				endY = second.getY();
+			} else {
+				dx = first.getX() - second.getX();
+				startX = second.getX();
+				startY = second.getY();
+				endX = first.getX();
+				endY = first.getY();
+			}
+		} else {
+			if (second.getX() > first.getX()) {
+				dx = second.getX() - first.getX();
+			} else {
+				dx = first.getX() - second.getX();
+			}
+
+			if (second.getY() > first.getY()) {
+				dy = second.getY() - first.getY();
+				startX = first.getX();
+				startY = first.getY();
+				endX = second.getX();
+				endY = second.getY();
+			} else {
+				dy = first.getY() - second.getY();
+				startX = second.getX();
+				startY = second.getY();
+				endX = first.getX();
+				endY = first.getY();
+			}
+		}
+
+		if (dx > dy) {
+			for (double x = startX; x <= endX; x++) {
+				double y;
+				if (startY < endY) {
+            		y = startY + dy * (x - startX) / dx;
+				} else {
+					y = startY - dy * (x - startX) / dx;
+				}
+            
+				for (double i = 0; i < 8; i++) {
+					for (double j = 0; j < 8; j++) {
+						if (x + i >= png.width()) break;
+						if (y + j >= png.height()) break;
+
+						// access every y associated with every x to get every pixel
+						cs225::HSLAPixel& pixel = png.getPixel(x + i, y + j);
+						// change color to black
+						pixel = green;
+					}
+				}
+        	}
+		} else {
+			for (double y = startY; y <= endY; y++) {
+				double x;
+				if (startX < endX) {
+					x = startX + dx * (y - startY) / dy;
+				} else {
+					x = startX - dx * (y - startY) / dy;
+				}
+        
+				for (double i = 0; i < 8; i++) {
+					for (double j = 0; j < 8; j++) {
+						if (x + i >= png.width()) break;
+						if (y + j >= png.height()) break;
+
+						// access every y associated with every x to get every pixel
+						cs225::HSLAPixel& pixel = png.getPixel(x + i, y + j);
+						// change color to black
+						pixel = green;
+					}
+				}
+        	}
+		}
+		/*
         double dx = second.getX() - first.getX();
         double dy = second.getY() - first.getY();
         for (double x = first.getX(); x <= second.getX(); x++) {
@@ -129,7 +217,7 @@ cs225::PNG Search::drawPath(cs225::PNG png) const {
                 }
             }
         }
-
+		*/
     }
 
     return png;
