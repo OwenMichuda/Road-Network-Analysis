@@ -140,3 +140,23 @@ TEST_CASE("astar finds shortest path", "[weight=1]") {
     REQUIRE(path == search.astar(Vertex(0, 0, 0), Vertex(5, 4, 5)));
   }
 }
+
+TEST_CASE("Test search methods on graph from file") {
+  Graph g("tests/test_connections.csv", "tests/test_vertices.csv", true);
+  Search search(g);
+
+  vector<Vertex> vertices = g.getVertices();
+  REQUIRE(vertices.size() > 0);
+
+  Vertex start = vertices[0];
+  Vertex end = vertices[4];
+
+  vector<Vertex> correct;
+
+  correct.push_back(Vertex(5,5329,3621));
+  correct.push_back(Vertex(3,1245,8231));
+  correct.push_back(Vertex(2,7234,6923));
+  correct.push_back(Vertex(1,3486,1292));
+
+  REQUIRE(search.BFS(start, end) == correct);
+}

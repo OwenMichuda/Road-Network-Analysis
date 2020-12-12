@@ -517,6 +517,9 @@ cs225::PNG Graph::render(Graph g, cs225::PNG png) const {
     // get adjacent vertices for each v, find distance between them, 
         // color each pixel along edge
     vector<Vertex> vertices = g.getVertices();
+
+    cs225::HSLAPixel black = cs225::HSLAPixel(226, 1, 0, 1);
+    cs225::HSLAPixel pink = cs225::HSLAPixel(328, 1, 0.76, 1);
     //vector<Edge> edges = g.getEdges();
     double dx = 0.0;
     double dy = 0.0;
