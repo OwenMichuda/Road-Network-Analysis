@@ -18,24 +18,28 @@ class Search {
     public:
         Search(Graph& g) : graph(g) {}
 
-        
         /**
          * Finds the shortest path between two vertices using BFS.
          * @return - the shortest path
          */
-        vector<Vertex> BFS(Vertex start, Vertex end);
+        vector<Vertex> BFS(Vertex start, Vertex end) const;
 
         /**
          * Finds the shortest path between two vertices using astar.
          * @return - the shortest path
          */
-        vector<Vertex> astar(Vertex start, Vertex end);
+        vector<Vertex> astar(Vertex start, Vertex end) const;
+
+        /**
+         * Draws astar and bfs paths to arbitrary points in graph.
+         */
+        cs225::PNG drawPath(cs225::PNG png) const;
 
     private:
         Graph& graph;
 
         /** Helper function to compute the heuristic for astar. */
-        double heuristic(Vertex current, Vertex end);
+        double heuristic(Vertex current, Vertex end) const;
 
         struct Node {
             Node() {}

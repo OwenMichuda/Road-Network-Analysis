@@ -6,6 +6,7 @@
 #include "vertex.h"
 #include "graph.h"
 #include "cs225/PNG.h"
+#include "search.h"
 
 using namespace std;
 
@@ -21,7 +22,10 @@ int main() {
 
 	//vector<Vertex> vert_vec;
 
+	Search search(g);
+
 	cs225::PNG toReturn = g.render(g, png);
+	toReturn = search.drawPath(toReturn);
 	toReturn.writeToFile("outputMap.png");
 	
 	//vector<Vertex> vert_vec;
