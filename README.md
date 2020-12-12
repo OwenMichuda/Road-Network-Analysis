@@ -4,7 +4,7 @@
 
 ### Building/Running the Code
 
-After cloning the repository, running the code on a road network requires two CSV files: one of the coordinate locations of the vertices, and one detailing the connections between each vertices. A sample set is provided in the 'sampledata' directory, or they can be found here ([vertices](https://www.cs.utah.edu/~lifeifei/research/tpq/OL.cnode), [connections](https://www.cs.utah.edu/~lifeifei/research/tpq/OL.cedge)). 
+After cloning the repository, running the code on a road network requires two CSV files: one of the coordinate locations of the vertices, and one detailing the connections (edges) between each vertex. A sample set is provided in the 'sampledata' directory, or they can be found here ([vertices](https://www.cs.utah.edu/~lifeifei/research/tpq/OL.cnode), [connections](https://www.cs.utah.edu/~lifeifei/research/tpq/OL.cedge)). 
 
 To build type "make" into the terminal while in the project directory. To run type "./finalproj" into the terminal. To run the catch test suites, build using "make test" and run using "./test".
 
