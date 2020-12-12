@@ -14,7 +14,7 @@ The first week of the project involved meeting together to determine what our pr
 - Created classes edge, graph, random (and associated files)
 - Imported cs225 PNG class (and associated classes)
 ### 12/1
-- Preliminary READ.me updates
+- Preliminary README.md updates
 
 The second week of development occurred after Thanksgiving break. We met over Zoom and started implementing some classes that we felt were necessary to start our development process. This included the graph class given to us through lab_ml as well as the cs225 namespace classes, more specifically the PNG class. We also dove deep into researching how to parse our data files, since we realized that we would have to use two different files to get all the necessary data. We also updated our READ.me file to keep everything up to date.
 
@@ -32,3 +32,16 @@ The second week of development occurred after Thanksgiving break. We met over Zo
 - Completed intial BFS and A* methods.
 - Continued work on test cases.
 - Created new constructor in Graph class that takes two csv files and makes a graph out of them
+### 12/10
+- Met with team.
+- Finalized the CSV constructor in Graph class.
+- Created BFS and A* test cases.
+- Created initial function to render the output image from BFS and A*;
+- Finished test cases for CSV constructor.
+### 12/11
+- Met with team.
+- Finalized render function.
+- Debugged and finalized BFS and A*.
+- Finalized README.md
+- Wrote RESULTS.md write-up
+- Recorded final video.
