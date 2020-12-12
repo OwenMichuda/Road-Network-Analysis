@@ -35,6 +35,11 @@ class Search {
          */
         cs225::PNG drawPath(cs225::PNG png) const;
 
+		/**
+		 * Helper function for drawPath.
+		 */ 
+		void drawPathHelper(cs225::PNG& png, cs225::HSLAPixel color, Vertex first, Vertex second) const;
+
     private:
         Graph& graph;
 

@@ -528,8 +528,8 @@ cs225::PNG Graph::render(Graph g, cs225::PNG png) const {
         double x_coor = v.getX();
         double y_coor = v.getY();
         // set the color of the correlating pixel (of the png) to pink
-        for (int i = 0; i <= 20; i++) {
-            for (int j = 0; j <= 20; j++) {
+        for (int i = 0; i <= 10; i++) {
+            for (int j = 0; j <= 10; j++) {
                 cs225::HSLAPixel& pixel = png.getPixel(x_coor + i, y_coor + j);
                 pixel.h = 328;
                 pixel.s = 1;
