@@ -6,7 +6,7 @@
 
 After cloning the repository, running the code on a road network requires two CSV files: one of the coordinate locations of the vertices, and one detailing the connections between each vertices. A sample set is provided in the 'sampledata' directory, or they can be found here ([vertices](https://www.cs.utah.edu/~lifeifei/research/tpq/OL.cnode), [connections](https://www.cs.utah.edu/~lifeifei/research/tpq/OL.cedge)). 
 
-To build the file type "make" into the terminal while in the project directory. To run the file type "./finalproj" into the terminal. To run the test suites, build using "make test" and run using "./test".
+To build type "make" into the terminal while in the project directory. To run type "./finalproj" into the terminal. To run the catch test suites, build using "make test" and run using "./test".
 
 ### Objectives
 
@@ -27,7 +27,7 @@ See oldenberg data set [here](https://www.cs.utah.edu/~lifeifei/SpatialDataset.h
 This is a visualization the sample road network of Oldenburg, Germany:
 ![network visual](sampledata/roadnetworkvis.jpg)
 
-  From [University of Utah](https://www.cs.utah.edu/~lifeifei/SpatialDataset.htm)
+From [University of Utah](https://www.cs.utah.edu/~lifeifei/SpatialDataset.htm)
 
 ### Video Run-through
 
