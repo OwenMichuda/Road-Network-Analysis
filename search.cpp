@@ -98,7 +98,7 @@ double Search::heuristic(Vertex current, Vertex end) const {
  */ 
 cs225::PNG Search::drawPath(cs225::PNG png) const {
     Vertex start = graph.getVertices().at(0);
-    Vertex end = graph.getVertices().at(4000);
+    Vertex end = graph.getVertices().at(516);
 
     cs225::HSLAPixel green = cs225::HSLAPixel(151, 1, 0.45, 1);
     cs225::HSLAPixel blue = cs225::HSLAPixel(223, 1, 0.50, 1);
@@ -199,25 +199,6 @@ cs225::PNG Search::drawPath(cs225::PNG png) const {
 				}
         	}
 		}
-		/*
-        double dx = second.getX() - first.getX();
-        double dy = second.getY() - first.getY();
-        for (double x = first.getX(); x <= second.getX(); x++) {
-            double y = first.getY() + dy * (x - first.getX()) / dx;
-            
-            for (double i = 0; i < 8; i++) {
-                for (double j = 0; j < 8; j++) {
-                    if (x + i >= png.width()) break;
-                    if (y + j >= png.height()) break;
-
-                    // access every y associated with every x to get every pixel
-                    cs225::HSLAPixel& pixel = png.getPixel(x + i, y + j);
-                    // change color to green
-                    pixel = green;
-                }
-            }
-        }
-		*/
     }
 
 
