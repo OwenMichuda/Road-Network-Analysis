@@ -2,6 +2,12 @@
 ## Final Project CS 225
 ## Erin Dowdy, Hania Dziurdzik, Fantah Kabba, Owen Michuda
 
+### Building/Running the Code
+
+After cloning the repository, running the code on a road network requires two CSV files: one of the coordinate locations of the vertices, and one detailing the connections between each vertices. A sample set is provided in the 'sampledata' directory, or they can be found here ([vertices](https://www.cs.utah.edu/~lifeifei/research/tpq/OL.cnode), [connections](https://www.cs.utah.edu/~lifeifei/research/tpq/OL.cedge)). 
+
+To build the file type "make" into the terminal while in the project directory. To run the file type "./finalproj" into the terminal. To run the test suites, build using "make test" and run using "./test".
+
 ### Objectives
 
 Our objective for this project was to use a BFS (breadth first search) and the A* search algorithm to find the shortest path between two nodes in a road network, with the roads acting as the edges of the graph. From their, we aim to produce a visual output of the shortest path on a graph image.
@@ -18,6 +24,11 @@ In this project we use BFS and A* search algorithms to find the shortest path be
 
 See oldenberg data set [here](https://www.cs.utah.edu/~lifeifei/SpatialDataset.htm).
 
+This is a visualization the sample road network of Oldenburg, Germany:
+![network visual](sampledata/roadnetworkvis.jpg)
+
+  From [University of Utah](https://www.cs.utah.edu/~lifeifei/SpatialDataset.htm)
+
 ### Video Run-through
 
-Watch on [Youtube](https://www.youtube.com/watch?v=ZoG5jJ3E8rg).
+Watch [here](https://www.youtube.com/watch?v=ZoG5jJ3E8rg).
