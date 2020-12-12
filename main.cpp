@@ -18,7 +18,7 @@ int main() {
 	Graph g(connections_file, vertices_file, true);
 	
 	cs225::PNG png;
-	png.readFromFile("newBackground.png");
+	png.readFromFile("background.png");
 
 	//vector<Vertex> vert_vec;
 
