@@ -20,10 +20,10 @@ The graphic output involved using the PNG and HSLAPixel classes provided to us i
 
 ## III. Figures
 
-Graphic output of network:
+Graphic output of blank network:
 
 ![Graphic Output of Graph](https://github-dev.cs.illinois.edu/cs225-fa20/eedowdy2-haniakd2-fkabba2-jamesom2/blob/master/map_output.png)
 
-Shortest path between nodes (in green):  
+Shortest path between two nodes, BFS (green), and A* (blue):  
 
-![Display of Shortest Path Between Nodes in Green](https://github-dev.cs.illinois.edu/cs225-fa20/eedowdy2-haniakd2-fkabba2-jamesom2/blob/master/short_path_output.png)
+![Display of Shortest Path Between Nodes in Green](https://github-dev.cs.illinois.edu/cs225-fa20/eedowdy2-haniakd2-fkabba2-jamesom2/blob/master/outputMap.png)
