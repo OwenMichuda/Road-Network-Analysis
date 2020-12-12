@@ -57,6 +57,7 @@ vector<Vertex> Search::astar(Vertex start, Vertex end) const {
     Node* current;
     while(!queue.empty()) {
         current = queue.top();
+        queue.pop();
 
         if (current->current == end) {
             break;
@@ -71,8 +72,6 @@ vector<Vertex> Search::astar(Vertex start, Vertex end) const {
                 visited.push_back(neighbor);
             }
         }
-
-        queue.pop();
     }
 
     vector<Vertex> path;
@@ -99,10 +98,12 @@ double Search::heuristic(Vertex current, Vertex end) const {
  */ 
 cs225::PNG Search::drawPath(cs225::PNG png) const {
     Vertex start = graph.getVertices().at(0);
-    Vertex end = graph.getVertices().at(8);
+    Vertex end = graph.getVertices().at(4000);
 
     cs225::HSLAPixel green = cs225::HSLAPixel(151, 1, 0.45, 1);
-    cs225::HSLAPixel pink = cs225::HSLAPixel(328, 1, 0.76, 1);
+    cs225::HSLAPixel blue = cs225::HSLAPixel(223, 1, 0.50, 1);
+    cs225::HSLAPixel red = cs225::HSLAPixel(5, 1, 0.50, 1);
+
 
     vector<Vertex> bfs = BFS(start, end);
     auto it = bfs.begin(); 
@@ -110,7 +111,6 @@ cs225::PNG Search::drawPath(cs225::PNG png) const {
         Vertex first = *it;
         Vertex second = *++it;
 
-        std::cout << first << std::endl;
 
         double dx = second.getX() - first.getX();
         double dy = second.getY() - first.getY();
@@ -124,12 +124,50 @@ cs225::PNG Search::drawPath(cs225::PNG png) const {
 
                     // access every y associated with every x to get every pixel
                     cs225::HSLAPixel& pixel = png.getPixel(x + i, y + j);
-                    // change color to black
+                    // change color to green
                     pixel = green;
                 }
             }
         }
 
+    }
+
+
+    vector<Vertex> a = astar(start, end);
+    it = a.begin(); 
+    while (it != a.end()) {
+        Vertex first = *it;
+        Vertex second = *++it;
+
+
+        double dx = second.getX() - first.getX();
+        double dy = second.getY() - first.getY();
+        for (double x = first.getX(); x <= second.getX(); x++) {
+            double y = first.getY() + dy * (x - first.getX()) / dx;
+            
+            for (double i = 0; i < 8; i++) {
+                for (double j = 0; j < 8; j++) {
+                    if (x + i >= png.width()) break;
+                    if (y + j >= png.height()) break;
+
+                    // access every y associated with every x to get every pixel
+                    cs225::HSLAPixel& pixel = png.getPixel(x + i, y + j);
+                    // change color to blue
+                    pixel = blue;
+                }
+            }
+        }
+
+    }
+
+    for (double i = 0; i < 30; i++) {
+        for (double j = 0; j < 30; j++) {
+            cs225::HSLAPixel& s = png.getPixel(start.getX() + i, start.getY() + j);
+            cs225::HSLAPixel& e = png.getPixel(end.getX() + i, end.getY() + j);
+
+            s = red;
+            e = red;
+        }
     }
 
     return png;
