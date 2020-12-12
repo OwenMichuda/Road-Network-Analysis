@@ -16,7 +16,7 @@ Graph::Graph(string connections_file, string vertices_file, bool weighted)
     vector<Edge> edge_v = readConnectionsCSV(connections_file, vertex_v);
     for (Edge e : edge_v) {
         insertEdge(e.source, e.dest);
-        setEdgeWeight(e.source, e.dest, e.getWeight());
+        if (weighted) setEdgeWeight(e.source, e.dest, e.getWeight());
     }
 }
 
@@ -27,8 +27,8 @@ vector<Vertex> Graph::readVertexCSV(string filename) {
     ifstream file(filename);
 
     if (!file) {
-        cout << "Vertices file does not exist.";
-        exit(0);
+        error("Vertex file does not exist at that address.");
+        exit(1);
     }
 
     while (getline(file, line)) {
@@ -65,8 +65,8 @@ vector<Edge> Graph::readConnectionsCSV(string filename, vector<Vertex> vertices)
     ifstream file(filename);
 
     if (!file) {
-        cout << "Connections file does not exist.";
-        exit(0);
+        error("Connections file does not exist at that address.");
+        exit(1);
     }
 
     while (getline(file, line)) {
@@ -465,19 +465,6 @@ void Graph::initSnapshot(string title)
 }
 
 /**
- * Saves a snapshot of the graph to file.
- * initSnapshot() must be run first.
- */
-void Graph::snapshot()
-{
-    std::stringstream ss;
-    ss << picNum;
-    string newName = picName + ss.str();
-    savePNG(newName);
-    ++picNum;
-}
-
-/**
  * Prints the graph to stdout.
  */
 void Graph::print() const
@@ -552,112 +539,4 @@ cs225::PNG Graph::render(Graph g, cs225::PNG png) const {
         }
     }
     return png;
-}
-
-/**
- * Saves the graph as a PNG image.
- * @param title - the filename of the PNG image
- */
-void Graph::savePNG(string title) const
-{
-    /* std::ofstream neatoFile;
-    string filename = "images/" + title + ".dot";
-    neatoFile.open(filename.c_str());
-
-    if (!neatoFile.good())
-        error("couldn't create " + filename + ".dot");
-
-    neatoFile
-        << "strict graph G {\n"
-        << "\toverlap=\"false\";\n"
-        << "\tdpi=\"1300\";\n"
-        << "\tsep=\"1.5\";\n"
-        << "\tnode [fixedsize=\"true\", shape=\"circle\", fontsize=\"7.0\"];\n"
-        << "\tedge [penwidth=\"1.5\", fontsize=\"7.0\"];\n";
-
-    vector<Vertex> allv = getVertices();
-    //lambda expression
-    sort(allv.begin(), allv.end(), [](const Vertex &lhs, const Vertex &rhs) {
-        return lhs.getIndex() > rhs.getIndex();
-    });
-
-    int xpos1 = 100;
-    int xpos2 = 100;
-    int xpos, ypos;
-    for (auto it : allv)
-    {
-        Vertex current = it;
-        neatoFile
-            << "\t\""
-            << current
-            << "\"";
-        if (current[1] == '1')
-        {
-            ypos = 100;
-            xpos = xpos1;
-            xpos1 += 100;
-        }
-        else
-        {
-            ypos = 200;
-            xpos = xpos2;
-            xpos2 += 100;
-        }
-        neatoFile << "[pos=\"" << xpos << "," << ypos << "\"]";
-        neatoFile << ";\n";
-    }
-
-    neatoFile << "\tedge [penwidth=\"1.5\", fontsize=\"7.0\"];\n";
-
-    for (auto it = adjacency_list.begin(); it != adjacency_list.end(); ++it)
-    {
-        for (auto it2 = it->second.begin(); it2 != it->second.end(); ++it2)
-        {
-            string vertex1Text = it->first;
-            string vertex2Text = it2->first;
-
-            neatoFile << "\t\"";
-            neatoFile << vertex1Text;
-            neatoFile << "\" -- \"";
-            neatoFile << vertex2Text;
-            neatoFile << "\"";
-
-            string edgeLabel = it2->second.getLabel();
-            if (edgeLabel == "WIN")
-            {
-                neatoFile << "[color=\"blue\"]";
-            }
-            else if (edgeLabel == "LOSE")
-            {
-                neatoFile << "[color=\"red\"]";
-            }
-            else
-            {
-                neatoFile << "[color=\"grey\"]";
-            }
-            if (weighted && it2->second.getWeight() != -1)
-                neatoFile << "[label=\"" << it2->second.getWeight() << "\"]";
-
-            neatoFile << "[constraint = \"false\"]"
-                      << ";\n";
-        }
-    }
-
-    neatoFile << "}";
-    neatoFile.close();
-    string command = "neato -n -Tpng " + filename + " -o " + "images/" + title + ".png 2> /dev/null";
-    int result = system(command.c_str());
-
-    if (result == 0)
-    {
-        cout << "Output graph saved as images/" << title << ".png" << endl;
-    }
-    else
-    {
-        cout << "Failed to generate visual output graph using `neato`. Install `graphviz` or `neato` to generate a visual graph." << endl;
-    }
-
-    string rmCommand = "rm -f " + filename + " 2> /dev/null";
-    system(rmCommand.c_str());
-    */
 }

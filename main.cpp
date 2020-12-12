@@ -11,7 +11,8 @@
 using namespace std;
 
 int main() {
-	// read data csv files
+
+	// set up for sample data
 	string connections_file = "sampledata/oldenburg_road_network.csv";
 	string vertices_file = "sampledata/OL_road_coords.csv";
 	
@@ -20,14 +21,11 @@ int main() {
 	cs225::PNG png;
 	png.readFromFile("background.png");
 
-
 	Search search(g);
 
 	cs225::PNG toReturn = g.render(g, png);
 	toReturn = search.drawPath(toReturn);
 	toReturn.writeToFile("outputMap.png");
 	
-
-
 	return 0;
 }

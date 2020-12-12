@@ -224,11 +224,6 @@ public:
      */
     void initSnapshot(string title);
 
-    /**
-     * Saves a snapshot of the graph to file.
-     * initSnapshot() must be run first.
-     */
-    void snapshot();
 
     /**
      * Prints the graph to stdout.
@@ -240,12 +235,6 @@ public:
     * Render graph onto png of map
     */
     cs225::PNG render(Graph g, cs225::PNG png) const;
-
-    /**
-     * Saves the graph as a PNG image.
-     * @param title - the filename of the PNG image
-     */
-    void savePNG(string title) const;
 
     bool isDirected() const;
 
