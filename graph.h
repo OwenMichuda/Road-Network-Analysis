@@ -234,7 +234,6 @@ public:
      * Prints the graph to stdout.
      */
     void print() const;
-
     
     /** 
     * Render graph onto png of map
@@ -242,10 +241,9 @@ public:
     cs225::PNG render(Graph g, cs225::PNG png) const;
 
     /**
-     * Saves the graph as a PNG image.
-     * @param title - the filename of the PNG image
-     */
-    void savePNG(string title) const;
+     * Helper function for drawPath.
+     */ 
+    static void drawPathHelper(cs225::PNG& png, cs225::HSLAPixel color, Vertex first, Vertex second, double size);
 
     bool isDirected() const;
 

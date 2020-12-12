@@ -511,30 +511,14 @@ cs225::PNG Graph::render(Graph g, cs225::PNG png) const {
 
     cs225::HSLAPixel black = cs225::HSLAPixel(226, 1, 0, 1);
     cs225::HSLAPixel pink = cs225::HSLAPixel(328, 1, 0.76, 1);
-    double dx = 0.0;
-    double dy = 0.0;
-    double y;
+    
     for (Vertex v : vertices) {
         // get the x and y
         vector<Vertex> adjacent = g.getAdjacent(v);
         for (Vertex a : adjacent) {
             // compute slope
-            dx = v.getX() - a.getX();
-            dy = v.getY() - a.getY();
-            for (double x = a.getX(); x <= v.getX(); x++) {
-                y = a.getY() + dy * (x - a.getX()) / dx;
-                // access every y associated with every x to get every pixel
-                for (int i = 0; i <= 10; i++) {
-                    for (int j = 0; j <= 10; j++) {
-                    cs225::HSLAPixel& pixel = png.getPixel(x + i, y + j);
-                    // change color to black
-                    pixel.h = 226;
-                    pixel.s = 1;
-                    pixel.l = 0;
-                    pixel.a = 1;
-                    }
-                }
-            }
+
+            drawPathHelper(png, black, v, a, 10);
         }
     }
     for (Vertex v : vertices) {
@@ -544,120 +528,100 @@ cs225::PNG Graph::render(Graph g, cs225::PNG png) const {
         for (int i = 0; i <= 10; i++) {
             for (int j = 0; j <= 10; j++) {
                 cs225::HSLAPixel& pixel = png.getPixel(x_coor + i, y_coor + j);
-                pixel.h = 328;
-                pixel.s = 1;
-                pixel.l = 0.76;
-                pixel.a = 1;
+                pixel = pink;
             }
         }
     }
     return png;
 }
 
-/**
- * Saves the graph as a PNG image.
- * @param title - the filename of the PNG image
- */
-void Graph::savePNG(string title) const
-{
-    /* std::ofstream neatoFile;
-    string filename = "images/" + title + ".dot";
-    neatoFile.open(filename.c_str());
+void Graph::drawPathHelper(cs225::PNG& png, cs225::HSLAPixel color, Vertex first, Vertex second, double size) {
+	double dx, dy, startX, endX, startY, endY;
+		
+	if (std::abs(first.getX() - second.getX()) > std::abs(first.getY() - second.getY())) {
+		if (second.getY() > first.getY()) {
+			dy = second.getY() - first.getY();
+		} else {
+			dy = first.getY() - second.getY();
+		}
 
-    if (!neatoFile.good())
-        error("couldn't create " + filename + ".dot");
+		if (second.getX() > first.getX()) {
+			dx = second.getX() - first.getX();
+			startX = first.getX();
+			startY = first.getY();
+			endX = second.getX();
+			endY = second.getY();
+		} else {
+			dx = first.getX() - second.getX();
+			startX = second.getX();
+			startY = second.getY();
+			endX = first.getX();
+			endY = first.getY();
+		}
+	} else {
+		if (second.getX() > first.getX()) {
+			dx = second.getX() - first.getX();
+		} else {
+			dx = first.getX() - second.getX();
+		}
 
-    neatoFile
-        << "strict graph G {\n"
-        << "\toverlap=\"false\";\n"
-        << "\tdpi=\"1300\";\n"
-        << "\tsep=\"1.5\";\n"
-        << "\tnode [fixedsize=\"true\", shape=\"circle\", fontsize=\"7.0\"];\n"
-        << "\tedge [penwidth=\"1.5\", fontsize=\"7.0\"];\n";
+		if (second.getY() > first.getY()) {
+			dy = second.getY() - first.getY();
+			startX = first.getX();
+			startY = first.getY();
+			endX = second.getX();
+			endY = second.getY();
+		} else {
+			dy = first.getY() - second.getY();
+			startX = second.getX();
+			startY = second.getY();
+			endX = first.getX();
+			endY = first.getY();
+		}
+	}
 
-    vector<Vertex> allv = getVertices();
-    //lambda expression
-    sort(allv.begin(), allv.end(), [](const Vertex &lhs, const Vertex &rhs) {
-        return lhs.getIndex() > rhs.getIndex();
-    });
+	if (dx > dy) {
+		for (double x = startX; x <= endX; x++) {
+			double y;
+			if (startY < endY) {
+				y = startY + dy * (x - startX) / dx;
+			} else {
+				y = startY - dy * (x - startX) / dx;
+			}
+		
+			for (double i = 0; i < size; i++) {
+				for (double j = 0; j < size; j++) {
+					if (x + i >= png.width()) break;
+					if (y + j >= png.height()) break;
 
-    int xpos1 = 100;
-    int xpos2 = 100;
-    int xpos, ypos;
-    for (auto it : allv)
-    {
-        Vertex current = it;
-        neatoFile
-            << "\t\""
-            << current
-            << "\"";
-        if (current[1] == '1')
-        {
-            ypos = 100;
-            xpos = xpos1;
-            xpos1 += 100;
-        }
-        else
-        {
-            ypos = 200;
-            xpos = xpos2;
-            xpos2 += 100;
-        }
-        neatoFile << "[pos=\"" << xpos << "," << ypos << "\"]";
-        neatoFile << ";\n";
-    }
+					// access every y associated with every x to get every pixel
+					cs225::HSLAPixel& pixel = png.getPixel(x + i, y + j);
+					// change color
+					pixel = color;
+				}
+			}
+		}
+	} else {
+		for (double y = startY; y <= endY; y++) {
+			double x;
+			if (startX < endX) {
+				x = startX + dx * (y - startY) / dy;
+			} else {
+				x = startX - dx * (y - startY) / dy;
+			}
+	
+			for (double i = 0; i < size; i++) {
+				for (double j = 0; j < size; j++) {
+					if (x + i >= png.width()) break;
+					if (y + j >= png.height()) break;
 
-    neatoFile << "\tedge [penwidth=\"1.5\", fontsize=\"7.0\"];\n";
-
-    for (auto it = adjacency_list.begin(); it != adjacency_list.end(); ++it)
-    {
-        for (auto it2 = it->second.begin(); it2 != it->second.end(); ++it2)
-        {
-            string vertex1Text = it->first;
-            string vertex2Text = it2->first;
-
-            neatoFile << "\t\"";
-            neatoFile << vertex1Text;
-            neatoFile << "\" -- \"";
-            neatoFile << vertex2Text;
-            neatoFile << "\"";
-
-            string edgeLabel = it2->second.getLabel();
-            if (edgeLabel == "WIN")
-            {
-                neatoFile << "[color=\"blue\"]";
-            }
-            else if (edgeLabel == "LOSE")
-            {
-                neatoFile << "[color=\"red\"]";
-            }
-            else
-            {
-                neatoFile << "[color=\"grey\"]";
-            }
-            if (weighted && it2->second.getWeight() != -1)
-                neatoFile << "[label=\"" << it2->second.getWeight() << "\"]";
-
-            neatoFile << "[constraint = \"false\"]"
-                      << ";\n";
-        }
-    }
-
-    neatoFile << "}";
-    neatoFile.close();
-    string command = "neato -n -Tpng " + filename + " -o " + "images/" + title + ".png 2> /dev/null";
-    int result = system(command.c_str());
-
-    if (result == 0)
-    {
-        cout << "Output graph saved as images/" << title << ".png" << endl;
-    }
-    else
-    {
-        cout << "Failed to generate visual output graph using `neato`. Install `graphviz` or `neato` to generate a visual graph." << endl;
-    }
-
-    string rmCommand = "rm -f " + filename + " 2> /dev/null";
-    system(rmCommand.c_str());
-    */
+					// access every y associated with every x to get every pixel
+					cs225::HSLAPixel& pixel = png.getPixel(x + i, y + j);
+					// change color
+					pixel = color;
+				}
+			}
+		}
+	}
 }
+
