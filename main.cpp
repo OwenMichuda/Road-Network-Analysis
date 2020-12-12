@@ -20,7 +20,6 @@ int main() {
 	cs225::PNG png;
 	png.readFromFile("background.png");
 
-	//vector<Vertex> vert_vec;
 
 	Search search(g);
 
@@ -28,10 +27,7 @@ int main() {
 	toReturn = search.drawPath(toReturn);
 	toReturn.writeToFile("outputMap.png");
 	
-	//vector<Vertex> vert_vec;
 
 
-
-	// create map object from file
 	return 0;
 }
