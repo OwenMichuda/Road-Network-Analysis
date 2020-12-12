@@ -107,10 +107,11 @@ cs225::PNG Search::drawPath(cs225::PNG png) const {
 
     vector<Vertex> bfs = BFS(start, end);
 	std::cout << "BFS length: " << bfs.size() << std::endl;
-    auto it = bfs.begin(); 
-    while (it != bfs.end()) {
-        Vertex first = *it;
-        Vertex second = *++it;
+    auto first_it = bfs.begin(); 
+    auto second_it = ++bfs.begin();
+    while (second_it != bfs.end()) {
+        Vertex first = *first_it++;
+        Vertex second = *second_it++;
 
 
 		double dx, dy, startX, endX, startY, endY;
@@ -203,10 +204,11 @@ cs225::PNG Search::drawPath(cs225::PNG png) const {
 
 
     vector<Vertex> a = astar(start, end);
-    it = a.begin(); 
-    while (it != a.end()) {
-        Vertex first = *it;
-        Vertex second = *++it;
+    first_it = a.begin(); 
+    second_it = ++a.begin();
+    while (second_it != a.end()) {
+        Vertex first = *first_it++;
+        Vertex second = *second_it++;
 
 
         double dx = second.getX() - first.getX();
