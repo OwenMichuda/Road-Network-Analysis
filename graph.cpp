@@ -542,12 +542,16 @@ cs225::PNG Graph::render(Graph g, cs225::PNG png) const {
             for (double x = a.getX(); x <= v.getX(); x++) {
                 y = a.getY() + dy * (x - a.getX()) / dx;
                 // access every y associated with every x to get every pixel
-                cs225::HSLAPixel& pixel = png.getPixel(x, y);
-                // change color to black
-                pixel.h = 226;
-                pixel.s = 1;
-                pixel.l = 0;
-                pixel.a = 1;
+                for (int i = 0; i <= 10; i++) {
+                    for (int j = 0; j <= 10; j++) {
+                    cs225::HSLAPixel& pixel = png.getPixel(x + i, y + j);
+                    // change color to black
+                    pixel.h = 226;
+                    pixel.s = 1;
+                    pixel.l = 0;
+                    pixel.a = 1;
+                    }
+                }
             }
         }
     }
@@ -555,11 +559,15 @@ cs225::PNG Graph::render(Graph g, cs225::PNG png) const {
         double x_coor = v.getX();
         double y_coor = v.getY();
         // set the color of the correlating pixel (of the png) to pink
-        cs225::HSLAPixel& pixel = png.getPixel(x_coor, y_coor);
-        pixel.h = 328;
-        pixel.s = 1;
-        pixel.l = 0.76;
-        pixel.a = 1;
+        for (int i = 0; i <= 20; i++) {
+            for (int j = 0; j <= 20; j++) {
+                cs225::HSLAPixel& pixel = png.getPixel(x_coor + i, y_coor + j);
+                pixel.h = 328;
+                pixel.s = 1;
+                pixel.l = 0.76;
+                pixel.a = 1;
+            }
+        }
     }
     return png;
 }
