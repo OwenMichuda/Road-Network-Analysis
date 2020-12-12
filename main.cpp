@@ -26,11 +26,6 @@ int main() {
 	cs225::PNG toReturn = g.render(g, png);
 	toReturn = search.drawPath(toReturn);
 	toReturn.writeToFile("outputMap.png");
-<<<<<<< HEAD
-
-
-=======
 	
->>>>>>> refs/remotes/origin/master
 	return 0;
 }

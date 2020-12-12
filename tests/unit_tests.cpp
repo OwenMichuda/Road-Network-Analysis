@@ -161,26 +161,3 @@ TEST_CASE("Test search methods on graph from file") {
   REQUIRE(search.BFS(start, end) == correct);
   REQUIRE(search.astar(start, end) != correct);
 }
-
-TEST_CASE("Testing on our actual data") {
-  string connections_file = "sampledata/oldenburg_road_network.csv";
-	string vertices_file = "sampledata/OL_road_coords.csv";
-	
-	Graph g(connections_file, vertices_file, true);
-  Search search(g);
-
-  vector<Vertex> vertices = g.getVertices();
-  REQUIRE(vertices.size() > 0);
-
-  Vertex start = vertices[7];
-  Vertex end = vertices[40];
-
-  vector<Vertex> correct;
-
-  correct.push_back(Vertex(5,5329,3621));
-  correct.push_back(Vertex(3,1245,8231));
-  correct.push_back(Vertex(2,7234,6923));
-  correct.push_back(Vertex(1,3486,1292));
-  
-  REQUIRE(search.astar(start, end) == correct);
-}
