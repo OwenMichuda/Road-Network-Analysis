@@ -19,7 +19,9 @@ In A*, nodes are added to the queue with priority, calculated as heuristic + wei
 ## III. Figures
 
 Graphic output of network:
+
 ![Graphic Output of Graph](https://github-dev.cs.illinois.edu/cs225-fa20/eedowdy2-haniakd2-fkabba2-jamesom2/blob/master/map_output.png)
 
 Shortest path between nodes (in green):  
+
 ![Display of Shortest Path Between Nodes in Green](https://github-dev.cs.illinois.edu/cs225-fa20/eedowdy2-haniakd2-fkabba2-jamesom2/blob/master/short_path_output.png)
