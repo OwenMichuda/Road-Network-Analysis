@@ -16,7 +16,7 @@ For this project we used BFS and A* search algorithms to find the shortest path 
 
 In A*, nodes are added to the queue with priority, calculated as heuristic + weight + current cost. 
 
-The graphic output involved using the PNG and HSLAPixel classes provided to us in several other labs/mps. Rendering the nodes turned out to be fairly simple once we discovered that implementing our Vertex object as class rather than a string typedef would give us a way to access the x and y coordinates of each "node". Rendering the edges took a bit of research into different line-drawing algorithms. We landed on a naive line-drawing algo because it was efficient enough for our implementation. To output the graph properly(as seen in Figure 1), we discovered that we had to increase the radius of each pixel by coloring the surrounding pixels of each vertex and edge. This allowed us to render our map in both an efficient and an effective way.
+The graphic output involved using the PNG and HSLAPixel classes provided to us in several other labs/mps. Rendering the nodes turned out to be fairly simple once we discovered that implementing our Vertex object as class rather than a string typedef would give us a way to access the x and y coordinates of each "node". Rendering the edges took a bit of research into different line-drawing algorithms. We landed on a naive line-drawing algo because it was efficient enough for our implementation. To output the graph properly (as seen in Figure 1), we discovered that we had to increase the radius of each pixel by coloring the surrounding pixels of each vertex and edge. This allowed us to render our map in both an efficient and an effective way.
 
 ## III. Figures
 
