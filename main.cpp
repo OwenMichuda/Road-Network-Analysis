@@ -6,6 +6,7 @@
 #include "vertex.h"
 #include "graph.h"
 #include "cs225/PNG.h"
+#include "search.h"
 
 using namespace std;
 
@@ -17,18 +18,16 @@ int main() {
 	Graph g(connections_file, vertices_file, true);
 	
 	cs225::PNG png;
-	png.readFromFile("newBackground.png");
+	png.readFromFile("background.png");
 
-	//vector<Vertex> vert_vec;
+
+	Search search(g);
 
 	cs225::PNG toReturn = g.render(g, png);
+	toReturn = search.drawPath(toReturn);
 	toReturn.writeToFile("outputMap.png");
 	
-	//vector<Vertex> vert_vec;
 
 
-
-	
-	// create map object from file
 	return 0;
 }
