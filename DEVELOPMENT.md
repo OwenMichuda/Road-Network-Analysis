@@ -45,3 +45,5 @@ The second week of development occurred after Thanksgiving break. We met over Zo
 - Finalized README.md
 - Wrote RESULTS.md write-up
 - Recorded final video.
+
+The third and final week of development, we spent a lot of time meeting together in order to effectively finalize our code. The week began with a meeting with our group mentor in which we discussed some of the plans we had made for our project. The next day the team met again to finish creating the initial class structure and to begin working on testing. From there we began work on our search algorithms. We then made a new constructor in the graph class to load our CSV data sets into a graph object. The last few days of development were focused on debugging and testing our existing code.
