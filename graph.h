@@ -224,11 +224,6 @@ public:
      */
     void initSnapshot(string title);
 
-    /**
-     * Saves a snapshot of the graph to file.
-     * initSnapshot() must be run first.
-     */
-    void snapshot();
 
     /**
      * Prints the graph to stdout.

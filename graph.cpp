@@ -16,7 +16,7 @@ Graph::Graph(string connections_file, string vertices_file, bool weighted)
     vector<Edge> edge_v = readConnectionsCSV(connections_file, vertex_v);
     for (Edge e : edge_v) {
         insertEdge(e.source, e.dest);
-        setEdgeWeight(e.source, e.dest, e.getWeight());
+        if (weighted) setEdgeWeight(e.source, e.dest, e.getWeight());
     }
 }
 
@@ -27,8 +27,8 @@ vector<Vertex> Graph::readVertexCSV(string filename) {
     ifstream file(filename);
 
     if (!file) {
-        cout << "Vertices file does not exist.";
-        exit(0);
+        error("Vertex file does not exist at that address.");
+        exit(1);
     }
 
     while (getline(file, line)) {
@@ -65,8 +65,8 @@ vector<Edge> Graph::readConnectionsCSV(string filename, vector<Vertex> vertices)
     ifstream file(filename);
 
     if (!file) {
-        cout << "Connections file does not exist.";
-        exit(0);
+        error("Connections file does not exist at that address.");
+        exit(1);
     }
 
     while (getline(file, line)) {
@@ -465,19 +465,6 @@ void Graph::initSnapshot(string title)
 }
 
 /**
- * Saves a snapshot of the graph to file.
- * initSnapshot() must be run first.
- */
-void Graph::snapshot()
-{
-    std::stringstream ss;
-    ss << picNum;
-    string newName = picName + ss.str();
-    savePNG(newName);
-    ++picNum;
-}
-
-/**
  * Prints the graph to stdout.
  */
 void Graph::print() const
@@ -624,4 +611,3 @@ void Graph::drawPathHelper(cs225::PNG& png, cs225::HSLAPixel color, Vertex first
 		}
 	}
 }
-

@@ -181,7 +181,6 @@ TEST_CASE("Testing on our actual data") {
   correct.push_back(Vertex(3,1245,8231));
   correct.push_back(Vertex(2,7234,6923));
   correct.push_back(Vertex(1,3486,1292));
-
-  //REQUIRE(search.BFS(start, end) == correct);
+  
   REQUIRE(search.astar(start, end) == correct);
 }
